@@ -15,7 +15,10 @@ class Shield{
   private:
     Motors* m1;
     Motors* m2;
-    AF_DCMotor* m0;
+    AF_DCMotor* s1;
+    AF_DCMotor* s2;
+    AF_DCMotor* s3;
+    AF_DCMotor* s4;
 };
 
 #endif

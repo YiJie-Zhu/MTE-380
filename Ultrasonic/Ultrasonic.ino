@@ -1,7 +1,7 @@
 #include "Ultrasonic.h"
 
-int trigPin = 40;
-int echoPin = 41;
+int trigPin = 42;
+int echoPin = 44;
 
 Ultrasonic ultra(trigPin, echoPin);
 

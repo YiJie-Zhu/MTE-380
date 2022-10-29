@@ -10,9 +10,4 @@ void setup(){
 
 void loop(){
   s1.forward();
-  delay(1000);
-  s1.reverse();
-  delay(1000);
-  s1.stop();
-  delay(1000);
 }

@@ -12,6 +12,7 @@ class Shield{
     void forward();
     void reverse();
     void stop();
+    void setSpeed(int speed);
   private:
     Motors* m1;
     Motors* m2;

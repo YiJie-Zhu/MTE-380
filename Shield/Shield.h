@@ -7,7 +7,7 @@
 
 class Shield{
   public:
-    Shield(int p1, int p2, int p3, int p4);
+    Shield(int p1, int p2, int p3, int p4, int e1, int e2);
     void setup();
     void forward();
     void reverse();

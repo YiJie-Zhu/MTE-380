@@ -1,7 +1,7 @@
 #include "Motors.h"
 
-Motors m1(22, 24);
-Motors m2(26, 28);
+Motors m1(22, 24, 44);
+Motors m2(26, 28, 46);
 
 void setup(){
   Serial.begin(9600);
@@ -13,6 +13,7 @@ void setup(){
 
 void loop(){
   Serial.println("loop");
+
   m1.forward();
   m2.forward();
   delay(1000);

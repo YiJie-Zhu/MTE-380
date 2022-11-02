@@ -13,6 +13,7 @@ class Shield{
     void reverse();
     void stop();
     void setSpeed(int speed);
+    void climb();
   private:
     Motors* m1;
     Motors* m2;

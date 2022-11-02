@@ -59,3 +59,12 @@ void Shield::setSpeed(int speed){
     m1->setSpeed(speed);
     m2->setSpeed(speed);
 }
+
+void Shield::climb(){
+    m1->setSpeed(150);
+    m2->setSpeed(150);
+    s1->setSpeed(100);
+    s2->setSpeed(100);
+    s3->setSpeed(100);
+    s4->setSpeed(100);
+}

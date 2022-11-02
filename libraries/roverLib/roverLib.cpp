@@ -1,15 +1,19 @@
 #include "roverLib.h"
 
 rover::rover(){
+	/*
+	// must provide default constructor
 	shield = shieldMotors();
     m1 = motor();
     m2 = motor();
+	*/
 }
 
 void rover::init(int p1, int p2, int p3, int p4, int e1, int e2){
 	shield = shieldMotors();
     m1 = motor(p1, p2, e1);
     m2 = motor(p3, p4, e2);
+	g = gyroSensor();
 }
 
 void rover::setup(){

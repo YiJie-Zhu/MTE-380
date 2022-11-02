@@ -3,6 +3,7 @@
 
 #include "Motors.h"
 #include "Shield.h"
+#include "Gyro.h"
 #include <Arduino.h>
 
 // Rover OBJ DEFINITIONS ====================================
@@ -11,6 +12,8 @@ class rover {
 	shieldMotors shield;
 	motor m1;
 	motor m2;
+	gyroSensor g;
+	
   public:
 
 	rover();

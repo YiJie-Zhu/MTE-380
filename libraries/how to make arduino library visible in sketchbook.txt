@@ -1,0 +1,3 @@
+1) in arduino preferences> sketchbook location, set as ...\GitHub\MTE-380 
+2) arduino will automatically detect the folders in this 'libraries' folders
+3) in arduino IDE, sketch> include library> roverLib

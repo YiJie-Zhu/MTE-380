@@ -7,8 +7,9 @@ Shield s1(22, 24, 26, 28, 44, 46);
 void setup(){
   Serial.begin(9600);
   s1.setup();
-  s1.setSpeed(60);
+  s1.setSpeed(50);
   delay(2000);
+  s1.stop();
 }
 
 void loop(){

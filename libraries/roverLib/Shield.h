@@ -5,7 +5,7 @@
 #include "Motors.h"
 #include <AFMotor.h>
 
-class shieldMotors{
+class ShieldMotors{
   public:
     shieldMotors();
     void setup();

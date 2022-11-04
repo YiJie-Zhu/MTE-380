@@ -3,11 +3,11 @@
 #include <MPU6050_light.h>
 #include "Wire.h"
 
-gyroSensor::gyroSensor(){
+GyroSensor::gyroSensor(){
     mpu = new MPU6050(Wire);
 }
 
-void gyroSensor::setup(){
+void GyroSensor::setup(){
   byte status = mpu->begin();
   Serial.print(F("MPU6050 status: "));
   Serial.println(status);
@@ -18,17 +18,17 @@ void gyroSensor::setup(){
   Serial.println("Done!\n");
 }
 
-float gyroSensor::angleX(){
+float GyroSensor::angleX(){
     mpu->update();
     return mpu->getAngleX();
 }
 
-float gyroSensor::angleY(){
+float GyroSensor::angleY(){
     mpu->update();
     return mpu->getAngleY();
 }
 
-float gyroSensor::angleZ(){
+float GyroSensor::angleZ(){
     mpu->update();
     return mpu->getAngleZ();
 }

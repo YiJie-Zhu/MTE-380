@@ -8,7 +8,7 @@ shieldMotors::shieldMotors(){
     s4 = NULL;
 }
 
-void ShieldMotors::setup(){
+void shieldMotors::setup(){
     s1 = new AF_DCMotor(1);
     s2 = new AF_DCMotor(2);
     s3 = new AF_DCMotor(3);
@@ -23,35 +23,35 @@ void ShieldMotors::setup(){
     s4->run(RELEASE);
 }
 
-void ShieldMotors::forward(){
+void shieldMotors::forward(){
     s1->run(FORWARD);
     s2->run(FORWARD);
     s3->run(FORWARD);
     s4->run(FORWARD);
 }
 
-void ShieldMotors::reverse(){
+void shieldMotors::reverse(){
     s1->run(BACKWARD);
     s2->run(BACKWARD);
     s3->run(BACKWARD);
     s4->run(BACKWARD);
 }
 
-void ShieldMotors::stop(){
+void shieldMotors::stop(){
     s1->run(RELEASE);
     s2->run(RELEASE);
     s3->run(RELEASE);
     s4->run(RELEASE);
 }
 
-void ShieldMotors::setSpeed(int speed){
+void shieldMotors::setSpeed(int speed){
     s1->setSpeed(speed);
     s2->setSpeed(speed);
     s3->setSpeed(speed);
     s4->setSpeed(speed);
 }
 
-void ShieldMotors::climb(){
+void shieldMotors::climb(){
     s1->setSpeed(100);
     s2->setSpeed(100);
     s3->setSpeed(100);

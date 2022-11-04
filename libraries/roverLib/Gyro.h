@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <MPU6050_light.h>
 
-class GyroSensor{
+class gyroSensor{
   public:
     gyroSensor();
     void setup();

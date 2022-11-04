@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-class Motor{
+class motor{
   public:
 	motor();
     motor(int p1, int p2, int e1);

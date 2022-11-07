@@ -9,17 +9,40 @@ rover::rover(){
 	*/
 }
 
-void rover::init(int p1, int p2, int p3, int p4, int e1, int e2){
+void rover::setupMotors(int p1, int p2, int p3, int p4, int e1, int e2){
+	s1.attach(10);
+	s2.attach(9);
+	
 	shield = shieldMotors();
+    shield.setup();
+	
     m1 = motor(p1, p2, e1);
+	m1.setup();
+    m1.stop();
+	
     m2 = motor(p3, p4, e2);
-	g = gyroSensor();
+	m2.setup();
+    m2.stop();
+	
 }
 
-void rover::setup(){
-    shield.setup();
-    m1.stop();
-    m2.stop();
+void rover::steerForward(){
+	s1.write(90);
+	s2.write(90);
+}
+
+void rover::steerRight(){
+	s1.write(0);
+	s2.write(0);
+}
+
+void rover::steerLeft(){
+	s1.write(180);
+	s2.write(180);
+}
+
+void rover::setupSensors(){
+	g = gyroSensor();
 }
 
 void rover::forward(){

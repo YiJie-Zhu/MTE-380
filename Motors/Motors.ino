@@ -1,7 +1,7 @@
 #include "Motors.h"
 
-Motors m1(22, 24, 44);
-Motors m2(26, 28, 46);
+Motors m1(45, 47, 43);
+Motors m2(49, 51, 53);
 
 void setup(){
   Serial.begin(9600);

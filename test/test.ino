@@ -1,19 +1,27 @@
-#include <MPU6050_light.h>
-
 #include <roverLib.h>
 
 // Arduino IDE only allows access to files in same level of folder 
 
+rover r1 = rover();
+  
 void setup(){
-    rover r1 = rover();
-    r1.init(22, 24, 26, 28, 44, 46);
-    r1.setup();
-    r1.setSpeed(20);
-    r1.forward();
-    delay(2000);
-    r1.stop();
+  Serial.begin(9600); 
+  r1.setupMotors(45, 47, 49, 51, 2, 13);
+  r1.setSpeed(150);
 }
 
 void loop(){
-
+  
+  r1.forward();
+  delay(1000);
+  
+  r1.steerLeft();
+  delay(1000);
+  r1.steerForward();
+  delay(1000);
+  r1.steerRight();
+  delay(1000);
+  
+  r1.stop();
+  delay(3000);
 }

@@ -6,6 +6,7 @@
 #include <AFMotor.h>
 
 class shieldMotors{
+	
   public:
     shieldMotors();
     void setup();
@@ -14,6 +15,7 @@ class shieldMotors{
     void stop();
     void setSpeed(int speed);
     void climb();
+	
   private:
     AF_DCMotor* s1;
     AF_DCMotor* s2;

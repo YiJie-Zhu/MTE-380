@@ -4,19 +4,19 @@
 motor::motor(){
     pin1 = 1;
     pin2 = 2;
-    enb1 = 3;
+    enb = 3;
 }
 
 motor::motor(int p1, int p2, int e1){
     pin1 = p1;
     pin2 = p2;
-    enb1 = e1;
+    enb = e1;
 }
 
 void motor::setup(){
     pinMode(pin1, OUTPUT);
     pinMode(pin2, OUTPUT);
-    pinMode(enb1, OUTPUT);
+    pinMode(enb, OUTPUT);
 }
 
 void motor::forward(){
@@ -35,5 +35,5 @@ void motor::stop(){
 }
 
 void motor::setSpeed(int speed){
-    analogWrite(enb1, speed);
+    analogWrite(enb, speed);
 }

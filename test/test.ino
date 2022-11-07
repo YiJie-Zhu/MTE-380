@@ -1,7 +1,5 @@
 #include <roverLib.h>
 
-// Arduino IDE only allows access to files in same level of folder 
-
 rover r1 = rover();
   
 void setup(){
@@ -18,10 +16,10 @@ void loop(){
   r1.steerLeft();
   delay(1000);
   r1.steerForward();
-  delay(1000);
+  delay(2000);
   r1.steerRight();
   delay(1000);
   
   r1.stop();
-  delay(3000);
+  delay(1000);
 }

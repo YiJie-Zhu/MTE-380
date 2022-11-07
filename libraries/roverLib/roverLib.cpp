@@ -1,12 +1,7 @@
 #include "roverLib.h"
 
 rover::rover(){
-	/*
-	// must provide default constructor
-	shield = shieldMotors();
-    m1 = motor();
-    m2 = motor();
-	*/
+
 }
 
 void rover::setupMotors(int p1, int p2, int p3, int p4, int e1, int e2){
@@ -27,18 +22,18 @@ void rover::setupMotors(int p1, int p2, int p3, int p4, int e1, int e2){
 }
 
 void rover::steerForward(){
-	s1.write(90);
-	s2.write(90);
+	s1.write(85);
+	s2.write(82);
 }
 
 void rover::steerRight(){
-	s1.write(0);
-	s2.write(0);
+	s1.write(45);
+	s2.write(45);
 }
 
 void rover::steerLeft(){
-	s1.write(180);
-	s2.write(180);
+	s1.write(135);
+	s2.write(135);
 }
 
 void rover::setupSensors(){

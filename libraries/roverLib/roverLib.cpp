@@ -36,10 +36,6 @@ void rover::steerLeft(){
 	s2.write(135);
 }
 
-void rover::setupSensors(){
-	g = gyroSensor();
-}
-
 void rover::forward(){
 	shield.forward();
     m1.forward();
@@ -68,4 +64,27 @@ void rover::climbSetting(){
     m1.setSpeed(150);
     m2.setSpeed(150);
 	shield.setSpeed(100);
+}
+
+void rover::setupSensors(){
+	g = gyroSensor();
+	g.setup();
+	
+	uLeft = Ultrasonic();
+	uLeft.setup(37,36);
+	
+	uFront = Ultrasonic();
+	uFront.setup(33, 32);
+}
+
+float rover::readDistFront(){
+	return uFront.read();
+}
+
+float rover::readDistLeft(){
+	return uLeft.read();
+}
+
+float rover::readGyroZ() {
+	return g.angleZ();
 }

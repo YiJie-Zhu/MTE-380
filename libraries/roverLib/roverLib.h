@@ -4,6 +4,7 @@
 #include "Motors.h"
 #include "Shield.h"
 #include "Gyro.h"
+#include "Ultrasonic.h"
 #include <Servo.h> 
 #include <Arduino.h>
 
@@ -16,6 +17,7 @@ class rover {
 	motor m2;
 	Servo s1, s2;
 	gyroSensor g;
+	Ultrasonic uFront, uLeft;
 	
   public:
 	rover();
@@ -33,5 +35,9 @@ class rover {
     void turnRight();
 	void turnLeft();
     void climbSetting();
+	
+	float readDistFront();
+	float readDistLeft();
+	float readGyroZ();
 };
 #endif

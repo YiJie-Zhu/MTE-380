@@ -1,6 +1,6 @@
 #include "Wire.h"
+#include <roverLib.h>
 
-float gyroX, gyroY, gyroZ;
 float lowerLeft = 10;
 float upperLeft = 12;
 float turnDistance = 20;
@@ -8,6 +8,8 @@ float turns = 9;
 float oneBlock = 1; //placeholder for 1 block distance
 float driveMotor = 50; //placeholder for driving motor speed
 
+rover r1 = rover();
+/*
 void turn()
 {
     // slow down current motor speed
@@ -21,17 +23,7 @@ void turn()
 // Make sure it is not trying to correct distance instead of turning
 void correct_distance(float currSpeed)
 {
-    //float motor_speed = (leftUltra.read() < lowerLeft ? 5 : (leftUltra.read() > upperLeft ? -5 : 0))
-    
-    //proportionally adjusting speed rather than constant
-    float motor_speed = (lowerLeft - leftUltra.read())*10;    
-        float leftMotor = currSpeed+motor_speed;
-        float rightMotor = currSpeed - motor_speed;
-        // set turning motors to motor_speed
-        while (leftUltra.read() < lowerLeft || leftUltra.read > upperLeft);
-    {
-        // Check if needs to turn instead of correcting
-    }
+   
 }
 
 bool check_shaking()
@@ -55,8 +47,9 @@ void check_drop() {
             while(gyroY > -50){}
         }
     }
-}
+}*/
 
+/*
 void loop()
 {
     int count = 0 while (count < turns)
@@ -89,12 +82,59 @@ void loop()
         count++;
     }
 }
+*/
+void check_distance()
+{
+    float gyro_pos = r1.readGyroZ();
+    float left_dist = r1.readDistLeft();
+    if (left_dist < 40){
+      r1.steerRight(20);
+    } else if (left_dist > 80) {
+      r1.steerLeft(20);
+    }
+
+}
+
+bool stop = false;
+float gyro_start;
+void loop()
+{
+    if (!stop) {
+        r1.forward();
+        delay(200);
+        float gyro_current = r1.readGyroZ();
+        int count = 10;
+        while (gyro_current < gyro_start + 90){
+          r1.steerRight(count);
+          delay(500);
+          if (count < 30){
+            count += 5;
+          }
+          gyro_current = r1.readGyroZ();
+          Serial.println(F("Current Gyro: "));
+          Serial.println(gyro_current);
+        }
+        r1.steerForward();
+        stop = true;
+    } else {
+        r1.stop();
+        float distance = r1.readDistFront();
+        // Serial.println(distance);
+    }
+}
 
 void setup()
 {
     // Required setups
     Serial.begin(9600);
     Wire.begin();
-    // set up gyro
-    // set up ultrasonic
+    r1.setupSensors();
+    r1.setupMotors(45, 47, 49, 51, 2, 13);
+    r1.setSpeed(150);
+    gyro_start = r1.readGyroZ();
+    Serial.println(F("Initial Gyro: "));
+    Serial.println(gyro_start);
+    r1.steerForward();
+
+    
 }

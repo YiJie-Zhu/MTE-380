@@ -22,18 +22,18 @@ void rover::setupMotors(int p1, int p2, int p3, int p4, int e1, int e2){
 }
 
 void rover::steerForward(){
-	s1.write(85);
-	s2.write(82);
+	s1.write(80);
+	s2.write(80);
 }
 
-void rover::steerRight(){
-	s1.write(45);
-	s2.write(45);
+void rover::steerRight(int x){
+	s1.write(80 - x);
+	s2.write(80 - x);
 }
 
-void rover::steerLeft(){
-	s1.write(135);
-	s2.write(135);
+void rover::steerLeft(int x){
+	s1.write(80 + x);
+	s2.write(80 + x);
 }
 
 void rover::forward(){

@@ -25,8 +25,8 @@ class rover {
 	void setupSensors();
 	
 	void steerForward();
-	void steerRight();
-	void steerLeft();
+	void steerRight(int x);
+	void steerLeft(int x);
 	
     void forward();
     void reverse();

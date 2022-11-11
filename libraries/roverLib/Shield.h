@@ -15,6 +15,7 @@ class shieldMotors{
     void stop();
     void setSpeed(int speed);
     void climb();
+	void setDiffSpeed(int fr, int fl, int mr, int ml);
 	
   private:
     AF_DCMotor* s1;

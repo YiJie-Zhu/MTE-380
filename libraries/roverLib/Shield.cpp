@@ -51,9 +51,19 @@ void shieldMotors::setSpeed(int speed){
     s4->setSpeed(speed);
 }
 
+void shieldMotors::setDiffSpeed(int fr, int fl, int mr, int ml){
+    s1->setSpeed(fl);
+    s2->setSpeed(ml);
+    s3->setSpeed(mr);
+    s4->setSpeed(fr);
+}
+
 void shieldMotors::climb(){
     s1->setSpeed(100);
     s2->setSpeed(100);
     s3->setSpeed(100);
     s4->setSpeed(100);
 }
+
+//s1 front left, s4 front right
+//s2 middle left, s3, middlr right

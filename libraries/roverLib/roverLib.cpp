@@ -77,6 +77,31 @@ void rover::setupSensors(){
 	uFront.setup(33, 32);
 }
 
+void rover::diffTurnRight(){
+	int angle = 35*3.14/180;
+	int speed = 200;
+	this->steerRight(35);
+	//setDiffSpeed(int fr, int fl, int mr, int ml)
+	shield.setDiffSpeed(speed/4, speed, speed*cos(angle)/4, speed*cos(angle));
+	//back left
+    m1.setSpeed(speed*cos(angle));
+	//back right
+    m2.setSpeed(speed*cos(angle)/4);
+}
+
+void rover::diffTurnLeft(){
+	int angle = 35*3.14/180;
+	int speed = 200;
+	this->steerLeft(35);
+	//setDiffSpeed(int fr, int fl, int mr, int ml)
+	shield.setDiffSpeed(speed, speed/4, speed*cos(angle), speed*cos(angle)/4);
+	//back left
+    m1.setSpeed(speed*cos(angle)/4);
+	//back right
+    m2.setSpeed(speed*cos(angle));
+}
+
+
 float rover::readDistFront(){
 	return uFront.read();
 }

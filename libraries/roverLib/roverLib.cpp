@@ -26,14 +26,12 @@ void rover::steerForward(){
 	s2.write(80);
 }
 
-void rover::steerRight(int x){
-	s1.write(80 - x);
-	s2.write(80 - x);
-}
-
-void rover::steerLeft(int x){
-	s1.write(80 + x);
-	s2.write(80 + x);
+void rover::steer(int x){
+	int turn = 80 - x;
+	if (turn < 50) turn = 50;
+	if (turn > 120) turn = 120;
+	s1.write(turn);
+	s2.write(turn);
 }
 
 void rover::forward(){
@@ -67,8 +65,8 @@ void rover::climbSetting(){
 }
 
 void rover::setupSensors(){
-	g = gyroSensor();
-	g.setup();
+	// g = gyroSensor();
+	// g.setup();
 	
 	uLeft = Ultrasonic();
 	uLeft.setup(37,36);
@@ -80,7 +78,7 @@ void rover::setupSensors(){
 void rover::diffTurnRight(){
 	int angle = 35*3.14/180;
 	int speed = 200;
-	this->steerRight(35);
+	this->steer(35);
 	//setDiffSpeed(int fr, int fl, int mr, int ml)
 	shield.setDiffSpeed(speed/4, speed, speed*cos(angle)/4, speed*cos(angle));
 	//back left
@@ -92,7 +90,7 @@ void rover::diffTurnRight(){
 void rover::diffTurnLeft(){
 	int angle = 35*3.14/180;
 	int speed = 200;
-	this->steerLeft(35);
+	this->steer(-35);
 	//setDiffSpeed(int fr, int fl, int mr, int ml)
 	shield.setDiffSpeed(speed, speed/4, speed*cos(angle), speed*cos(angle)/4);
 	//back left

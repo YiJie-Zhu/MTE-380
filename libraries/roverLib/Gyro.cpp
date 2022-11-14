@@ -32,3 +32,4 @@ float gyroSensor::angleZ(){
     mpu->update();
     return mpu->getAngleZ();
 }
+

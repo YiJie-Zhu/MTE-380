@@ -17,7 +17,7 @@ class rover {
 	motor m2;
 	Servo s1, s2;
 	gyroSensor g;
-	Ultrasonic uFront, uLeft;
+	Ultrasonic uFront, uLeftFront, uLeftBack;
 	
   public:
 	rover();
@@ -31,14 +31,15 @@ class rover {
     void reverse();
     void stop();
     void setSpeed(int speed);
-    void turnRight();
+    void turnRight(float tolerance);
 	void turnLeft();
     void climbSetting();
 	void diffTurnRight();
 	void diffTurnLeft();
 	
 	float readDistFront();
-	float readDistLeft();
+	float readDistLeftFront();
+	float readDistLeftBack();
 	float readGyroZ();
 };
 #endif

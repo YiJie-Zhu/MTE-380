@@ -32,12 +32,12 @@ void loop(){
     delay(2500);
     r1.stop();
   }
-  */
+  
   float front_dist = r1.readDistFront();
   float left_dist = r1.readDistLeft();
   float motor_angle = correction(6-left_dist);
   r1.steer(motor_angle);
-
+  */
   // Serial.println(front_dist);
   // Serial.println("Ultrasonic: ");
   // Serial.println(left_dist);

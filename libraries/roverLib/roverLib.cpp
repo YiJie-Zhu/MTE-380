@@ -17,19 +17,27 @@ void rover::setupMotors(int p1, int p2, int p3, int p4, int e1, int e2){
 	
     m2 = motor(p3, p4, e2);
 	m2.setup();
-    m2.stop();
+    m2.stop();	
+}
+
+void rover::setupSensors(){
+	uLeftFront = Ultrasonic();
+	uLeftFront.setup(39,38);
 	
+	uLeftBack = Ultrasonic();
+	uLeftBack.setup(37,36);
+
+	uFront = Ultrasonic();
+	uFront.setup(33, 32);
 }
 
 void rover::steerForward(){
-	s1.write(80);
-	s2.write(80);
+	s1.write(75);
+	s2.write(75);
 }
 
 void rover::steer(int x){
-	int turn = 80 - x;
-	if (turn < 50) turn = 50;
-	if (turn > 120) turn = 120;
+	int turn = 75 - x;
 	s1.write(turn);
 	s2.write(turn);
 }
@@ -64,20 +72,9 @@ void rover::climbSetting(){
 	shield.setSpeed(100);
 }
 
-void rover::setupSensors(){
-	// g = gyroSensor();
-	// g.setup();
-	
-	uLeft = Ultrasonic();
-	uLeft.setup(37,36);
-	
-	uFront = Ultrasonic();
-	uFront.setup(33, 32);
-}
-
 void rover::diffTurnRight(){
 	int angle = 35*3.14/180;
-	int speed = 200;
+	int speed = 225;
 	this->steer(35);
 	//setDiffSpeed(int fr, int fl, int mr, int ml)
 	shield.setDiffSpeed(speed/4, speed, speed*cos(angle)/4, speed*cos(angle));
@@ -99,15 +96,32 @@ void rover::diffTurnLeft(){
     m2.setSpeed(speed*cos(angle));
 }
 
-
 float rover::readDistFront(){
 	return uFront.read();
 }
 
-float rover::readDistLeft(){
-	return uLeft.read();
+float rover::readDistLeftFront(){
+	return uLeftFront.read();
+}
+
+float rover::readDistLeftBack(){
+	return uLeftBack.read();
 }
 
 float rover::readGyroZ() {
 	return g.angleZ();
+}
+
+void rover::turnRight(float tolerance){
+	this->diffTurnRight();
+	delay(2000); 
+	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
+		delay(10);
+		Serial.println("Back Dist: ");
+		Serial.println(this->readDistLeftBack());
+		Serial.println("Front Dist: ");
+		Serial.println(this->readDistLeftFront());
+	}
+
+	this->steerForward();
 }

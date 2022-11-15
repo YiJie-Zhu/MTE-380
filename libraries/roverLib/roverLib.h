@@ -36,6 +36,7 @@ class rover {
     void climbSetting();
 	void diffTurnRight();
 	void diffTurnLeft();
+	void correction(float dist);
 	
 	float readDistFront();
 	float readDistLeftFront();

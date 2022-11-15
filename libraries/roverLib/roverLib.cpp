@@ -117,11 +117,20 @@ void rover::turnRight(float tolerance){
 	delay(2000); 
 	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
 		delay(10);
-		Serial.println("Back Dist: ");
-		Serial.println(this->readDistLeftBack());
-		Serial.println("Front Dist: ");
-		Serial.println(this->readDistLeftFront());
 	}
 
 	this->steerForward();
+}
+
+void rover::correction(float dist){
+	float result = 0;
+	if (dist < 0.25 && dist > -0.25){
+		result = 0;
+	} 
+	else{
+		result = (1.0/6)*dist*dist*dist+dist;
+	}
+	Serial.print("Correction Res");
+	Serial.println(result);
+	this->steer(result);
 }

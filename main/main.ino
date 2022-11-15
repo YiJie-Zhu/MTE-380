@@ -14,7 +14,7 @@ float correction(float dist){
   float result = 0;
   if (dist < 0.5 && dist > -0.5) result = 0;
   else result = (1.0/15)*dist*dist*dist+dist;
-  return result;
+  r1.steer(result);
 }
 
 void setup(){
@@ -44,7 +44,6 @@ void loop(){
     float left_dist_front = r1.readDistLeftFront();
     float left_dist_back = r1.readDistLeftFront();
     float motor_angle = correction(left_dist[turns] - left_dist_front);
-    r1.steer(motor_angle);
 
     // Serial.println(front_dist);
     // Serial.println("Ultrasonic: ");

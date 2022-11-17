@@ -31,6 +31,7 @@ class rover {
     void reverse();
     void stop();
     void setSpeed(int speed);
+	void setSpeedWheel(int speed, int wheel);
     void turnRight(float tolerance);
 	void turnLeft();
     void climbSetting();

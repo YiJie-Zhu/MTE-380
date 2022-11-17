@@ -51,11 +51,13 @@ void shieldMotors::setSpeed(int speed){
     s4->setSpeed(speed);
 }
 
-void shieldMotors::setDiffSpeed(int fr, int fl, int mr, int ml){
-    s1->setSpeed(fl);
-    s2->setSpeed(ml);
-    s3->setSpeed(mr);
-    s4->setSpeed(fr);
+void shieldMotors::setSpeedWheel(int speed, int wheel){
+    // 1 = fl, 2 = fr, 3 = ml, 4 = mr, 5 = bl, 6 = br
+    if (wheel == 1) s1->setSpeed(speed);
+    else if (wheel == 3) s2->setSpeed(speed);
+    else if (wheel == 4) s3->setSpeed(speed);
+    else if (wheel == 2) s4->setSpeed(speed);
+
 }
 
 void shieldMotors::climb(){

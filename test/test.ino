@@ -14,14 +14,23 @@ void setup(){
   r1.setupMotors(45, 47, 49, 51, 2, 13);
   r1.steerForward();
   delay(2000);
-  //r1.setSpeed(150);
-  r1.climbSetting();
+  r1.setSpeed(100);
   r1.forward();
 }
 
 void loop(){
-  if(stop == true){
-    return;
+  if(stop){
+    exit(0);
+  }
+  float dist = r1.readDistFront();
+  delay(1000);
+  if (dist - r1.readDistFront() < 1 && inPit){
+    r1.setSpeedWheel(160, 3);
+    r1.setSpeedWheel(160, 4);
+    r1.setSpeedWheel(255, 5);
+    r1.setSpeedWheel(255, 6);
+  } else if (inPit){
+      r1.climbSetting();
   }
   float front_dist = r1.readDistFront();
   if(millis() - last_front_dist_time > 200){
@@ -38,11 +47,8 @@ void loop(){
     // Serial.println(inPit);
   }
   
-  if(front_dist <= 20){
+  if(front_dist <= 2){
     stop = true;
     r1.stop();
-  }
-  if(stop == true){
-    return;
   }
 }

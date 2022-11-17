@@ -67,15 +67,15 @@ void rover::setSpeed(int speed){
 }
 
 void rover::climbSetting(){
-    m1.setSpeed(150);
+	shield.setSpeed(200);
+	m1.setSpeed(150);
     m2.setSpeed(150);
-	shield.setSpeed(100);
 }
 
 void rover::diffTurnRight(){
 	int angle = 35*3.14/180;
 	int speed = 225;
-	this->steer(35);
+	this->steer(30);
 	//setDiffSpeed(int fr, int fl, int mr, int ml)
 	shield.setDiffSpeed(speed/4, speed, speed*cos(angle)/4, speed*cos(angle));
 	//back left
@@ -117,6 +117,10 @@ void rover::turnRight(float tolerance){
 	delay(2000); 
 	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
 		delay(10);
+		Serial.println("Back Dist: ");
+		Serial.println(this->readDistLeftBack());
+		Serial.println("Front Dist: ");
+		Serial.println(this->readDistLeftFront());
 	}
 
 	this->steerForward();
@@ -128,9 +132,17 @@ void rover::correction(float dist){
 		result = 0;
 	} 
 	else{
-		result = (1.0/6)*dist*dist*dist+dist;
+		result = (1.0/10)*dist*dist*dist+dist;
+		// 1/15 for design spec, 1/10 for actual
 	}
-	Serial.print("Correction Res");
+	if (result > 10){
+		result = 10;
+	}
+	else if(result < -10){
+		result = -10;
+	}
+	
+	Serial.print("Correction Res: ");
 	Serial.println(result);
 	this->steer(result);
 }

@@ -3,7 +3,7 @@
 
 rover r1 = rover();
 int run = 1;
-int turnDist = 28;
+int turnDist = 25;
 float turn_tol = 1.3;
 
 void setup(){

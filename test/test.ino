@@ -23,10 +23,8 @@ void loop(){
     exit(0);
   }
   float dist = r1.readDistFront();
-  Serial.println(dist);
   delay(1000);
-  Serial.println(r1.readDistFront());
-  if (dist - r1.readDistFront() < 1 && inPit){
+  if (dist > 1000 && r1.readDistFront() > 1000){
     r1.setSpeedWheel(180, 3);
     r1.setSpeedWheel(180, 4);
     r1.setSpeedWheel(255, 5);

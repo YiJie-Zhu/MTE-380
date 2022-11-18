@@ -20,25 +20,15 @@ void setup(){
   r1.setupSensors();
   r1.steerForward();
   r1.setSpeed(100);
+  delay(2000);
   r1.forward();
 }
 
 void loop(){
-  /*
-  if (r1.readDistFront() < 23){
-    r1.diffTurnRight();
-    r1.forward();
-    //while((r1.readGyroZ() - dist) < 90){}
-    delay(2500);
-    r1.stop();
-  }
-  
-  float front_dist = r1.readDistFront();
-  float left_dist = r1.readDistLeft();
-  float motor_angle = correction(6-left_dist);
-  r1.steer(motor_angle);
-  */
-  // Serial.println(front_dist);
-  // Serial.println("Ultrasonic: ");
-  // Serial.println(left_dist);
+  r1.setSpeedWheel(150, 1);
+  r1.setSpeedWheel(150, 2);
+  r1.setSpeedWheel(150, 3);
+  r1.setSpeedWheel(150, 4);
+  r1.setSpeedWheel(100, 5);
+  r1.setSpeedWheel(100, 6);
 }

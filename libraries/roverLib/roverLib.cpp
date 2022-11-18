@@ -82,8 +82,8 @@ void rover::setSpeedWheel(int speed, int wheel){
 void rover::climbSetting(){
 	this->setSpeedWheel(200, 1);
 	this->setSpeedWheel(200, 2);
-	this->setSpeedWheel(200, 3);
-	this->setSpeedWheel(200, 4);
+	this->setSpeedWheel(220, 3);
+	this->setSpeedWheel(220, 4);
 	this->setSpeedWheel(0, 5);
 	this->setSpeedWheel(0, 6);
 }

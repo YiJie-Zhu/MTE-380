@@ -5,7 +5,7 @@ rover r1 = rover();
 
 long int last_front_dist_time = 0;
 float last_front_dist = 0.0;
-bool inPit = false;
+bool inPit = true;
 bool stop = false;
   
 void setup(){
@@ -14,7 +14,7 @@ void setup(){
   r1.setupMotors(45, 47, 49, 51, 2, 13);
   r1.steerForward();
   delay(2000);
-  r1.setSpeed(100);
+  r1.climbSetting();
   r1.forward();
 }
 
@@ -23,14 +23,14 @@ void loop(){
     exit(0);
   }
   float dist = r1.readDistFront();
+  Serial.println(dist);
   delay(1000);
+  Serial.println(r1.readDistFront());
   if (dist - r1.readDistFront() < 1 && inPit){
-    r1.setSpeedWheel(160, 3);
-    r1.setSpeedWheel(160, 4);
+    r1.setSpeedWheel(180, 3);
+    r1.setSpeedWheel(180, 4);
     r1.setSpeedWheel(255, 5);
     r1.setSpeedWheel(255, 6);
-  } else if (inPit){
-      r1.climbSetting();
   }
   float front_dist = r1.readDistFront();
   if(millis() - last_front_dist_time > 200){
@@ -40,10 +40,10 @@ void loop(){
       inPit = true;
     }
     last_front_dist = front_dist;
-    Serial.print("LFD: ");
-    Serial.println(last_front_dist);
-    Serial.print("FD: ");
-    Serial.println(front_dist);
+    // Serial.print("LFD: ");
+    // Serial.println(last_front_dist);
+    // Serial.print("FD: ");
+    // Serial.println(front_dist);
     // Serial.println(inPit);
   }
   

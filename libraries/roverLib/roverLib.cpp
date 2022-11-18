@@ -80,10 +80,10 @@ void rover::setSpeedWheel(int speed, int wheel){
 }
 
 void rover::climbSetting(){
-	this->setSpeedWheel(250, 1);
-	this->setSpeedWheel(250, 2);
-	this->setSpeedWheel(250, 3);
-	this->setSpeedWheel(250, 4);
+	this->setSpeedWheel(200, 1);
+	this->setSpeedWheel(200, 2);
+	this->setSpeedWheel(200, 3);
+	this->setSpeedWheel(200, 4);
 	this->setSpeedWheel(0, 5);
 	this->setSpeedWheel(0, 6);
 }
@@ -157,9 +157,9 @@ void rover::correction(float dist){
 	else if(result < -20){
 		result = -20;
 	}
-	Serial.print("Dist Res: ");
-	Serial.println(dist);
-	Serial.print("Correction Res: ");
-	Serial.println(result);
-	this->steer(result);
+	// Serial.print("Dist Res: ");
+	// Serial.println(dist);
+	// Serial.print("Correction Res: ");
+	// Serial.println(result);
+	// this->steer(result);
 }

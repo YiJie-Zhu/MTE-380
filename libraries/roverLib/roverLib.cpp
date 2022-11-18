@@ -157,7 +157,8 @@ void rover::correction(float dist){
 	else if(result < -20){
 		result = -20;
 	}
-	
+	Serial.print("Dist Res: ");
+	Serial.println(dist);
 	Serial.print("Correction Res: ");
 	Serial.println(result);
 	this->steer(result);

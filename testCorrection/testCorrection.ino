@@ -22,8 +22,6 @@ void loop(){
     float front_dist = r1.readDistFront();
     r1.correction(5-left_dist_front);
     delay(100);
-    Serial.print("Left Ultrasonic result: ");
-    Serial.println(left_dist_front);
     if(front_dist <= 30){
       delay(100);
       if(r1.readDistFront() <= 30){

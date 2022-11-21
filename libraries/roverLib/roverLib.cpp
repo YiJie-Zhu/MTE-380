@@ -86,7 +86,6 @@ void rover::climbSetting(){
 	this->setSpeedWheel(250, 4);
 	this->setSpeedWheel(0, 5);
 	this->setSpeedWheel(0, 6);
-	this->steer(15);
 }
 
 void rover::diffTurnRight(){
@@ -136,7 +135,7 @@ float rover::readGyroZ() {
 
 void rover::turnRight(float tolerance){
 	this->diffTurnRight();
-	delay(1500); 
+	delay(2000); 
 	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
 	}
 

@@ -52,6 +52,7 @@ void loop(){
       r1.setSpeedWheel(180, 4);
       r1.setSpeedWheel(255, 5);
       r1.setSpeedWheel(255, 6);
+      r1.steer(15);
       delay(2000);
       inPit = false;
       r1.setSpeed(250);

@@ -23,8 +23,8 @@ void loop(){
     exit(0);
   }
   float dist = r1.readDistFront();
-  delay(1000);
-  if (dist > 1000 && r1.readDistFront() > 1000){
+  delay(1500);
+  if (dist - r1.readDistFront() < 1 && inPit){
     r1.setSpeedWheel(180, 3);
     r1.setSpeedWheel(180, 4);
     r1.setSpeedWheel(255, 5);

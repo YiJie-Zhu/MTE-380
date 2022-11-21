@@ -82,16 +82,17 @@ void rover::setSpeedWheel(int speed, int wheel){
 void rover::climbSetting(){
 	this->setSpeedWheel(200, 1);
 	this->setSpeedWheel(200, 2);
-	this->setSpeedWheel(220, 3);
-	this->setSpeedWheel(220, 4);
+	this->setSpeedWheel(250, 3);
+	this->setSpeedWheel(250, 4);
 	this->setSpeedWheel(0, 5);
 	this->setSpeedWheel(0, 6);
+	this->steer(15);
 }
 
 void rover::diffTurnRight(){
 	int angle = 35*3.14/180;
 	int speed = 225;
-	this->steer(30);
+	this->steer(35);
 	shield.setSpeedWheel(speed, 1);
 	shield.setSpeedWheel(speed/4, 2);
 	shield.setSpeedWheel(speed*cos(angle), 3);
@@ -161,5 +162,5 @@ void rover::correction(float dist){
 	// Serial.println(dist);
 	// Serial.print("Correction Res: ");
 	// Serial.println(result);
-	// this->steer(result);
+	this->steer(result);
 }

@@ -54,6 +54,12 @@ void rover::reverse(){
     m2.reverse();
 }
 
+void rover::climb() {
+	shield.forward();
+	m1.reverse();
+	m2.reverse();
+}
+
 void rover::stop(){
 	shield.stop();
     m1.stop();
@@ -80,6 +86,15 @@ void rover::setSpeedWheel(int speed, int wheel){
 }
 
 void rover::climbSetting(){
+	this->setSpeedWheel(200, 1);
+	this->setSpeedWheel(200, 2);
+	this->setSpeedWheel(250, 3);
+	this->setSpeedWheel(250, 4);
+	this->setSpeedWheel(200, 5);
+	this->setSpeedWheel(200, 6);
+}
+
+void rover::pitSetting() {
 	this->setSpeedWheel(200, 1);
 	this->setSpeedWheel(200, 2);
 	this->setSpeedWheel(250, 3);

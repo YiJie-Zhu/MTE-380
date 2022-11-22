@@ -48,6 +48,7 @@ void loop(){
 
   if(inPit){
     if (last_front_dist - front_dist < 1 && millis() - time_at_pit > 3500){
+      r1.forward();
       r1.setSpeedWheel(180, 3);
       r1.setSpeedWheel(180, 4);
       r1.setSpeedWheel(255, 5);
@@ -57,8 +58,12 @@ void loop(){
       inPit = false;
       r1.setSpeed(250);
     }
-    else{
+    else if (millis() - time_at_pit > 3500) {
       r1.climbSetting();
+      r1.climb();
+    }
+    else{
+      r1.pitSetting();
     }
   }
 

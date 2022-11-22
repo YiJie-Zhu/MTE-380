@@ -21,14 +21,14 @@ void setup(){
   r1.steerForward();
   r1.setSpeed(100);
   delay(2000);
-  r1.forward();
+  r1.climb();
 }
 
 void loop(){
-  r1.setSpeedWheel(150, 1);
-  r1.setSpeedWheel(150, 2);
-  r1.setSpeedWheel(150, 3);
-  r1.setSpeedWheel(150, 4);
-  r1.setSpeedWheel(100, 5);
-  r1.setSpeedWheel(100, 6);
+  r1.setSpeedWheel(200, 1); //LF
+  r1.setSpeedWheel(200, 2); //RF
+  r1.setSpeedWheel(250, 3); //LM
+  r1.setSpeedWheel(250, 4); //RM
+  r1.setSpeedWheel(200, 5); //LB
+  r1.setSpeedWheel(200, 6); //RB
 }

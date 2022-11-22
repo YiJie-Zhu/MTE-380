@@ -15,7 +15,7 @@ void setup(){
   r1.steerForward();
   delay(2000);
   r1.climbSetting();
-  r1.forward();
+  r1.climb();
 }
 
 void loop(){
@@ -23,8 +23,10 @@ void loop(){
     exit(0);
   }
   float dist = r1.readDistFront();
-  delay(1500);
+  delay(750);
+ // if (last_front_dist - front_dist < 1 /*&& millis() - time_at_pit > 3500*/){
   if (dist - r1.readDistFront() < 1 && inPit){
+    r1.forward();
     r1.setSpeedWheel(180, 3);
     r1.setSpeedWheel(180, 4);
     r1.setSpeedWheel(255, 5);

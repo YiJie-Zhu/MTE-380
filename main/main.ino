@@ -10,6 +10,7 @@ float last_front_dist = 1000;
 long int last_front_dist_time = 0;
 long int time_at_wall = 0;
 long int time_at_pit = 0;
+long int time_in_wheelie = 0;
 float front_dist = 150;
 int turns = 0;
 float turn_dist[11] = {22.5, 22.5, 22.5, 54, 54, 54, 54, 84, 84, 84, 84};
@@ -32,7 +33,7 @@ void loop(){
   if(stop == true){
     return;
   }
-  if(millis() - last_front_dist_time > 500 && inPit){
+  if(millis() - last_front_dist_time > 200 && inPit){
     last_front_dist_time = millis();
     // if(last_front_dist < 1000 && last_front_dist - front_dist > 20.0){
     //   inPit = true;
@@ -48,22 +49,41 @@ void loop(){
   }
 
   if(inPit){
-    if (last_front_dist - front_dist < 1 && millis() - time_at_pit > 3500){
+    // if (last_front_dist - front_dist < 1 && millis() - time_in_wheelie > 1000){
+    //   r1.setSpeedWheel(180, 3);
+    //   r1.setSpeedWheel(180, 4);
+    //   r1.setSpeedWheel(255, 5);
+    //   r1.setSpeedWheel(255, 6);
+    //   r1.forward();
+
+    //   //r1.steer(15);
+    //   delay(1000);
+    //   inPit = false;
+    //   r1.setSpeed(250);
+    // }
+    //else if (millis() - time_at_pit > 1000) {
+    if(r1.readDistFront() < 65){
+      r1.climbSetting();
+      r1.climb();
+      //time_in_wheelie = millis();
+      delay(1000);
       r1.setSpeedWheel(180, 3);
       r1.setSpeedWheel(180, 4);
       r1.setSpeedWheel(255, 5);
       r1.setSpeedWheel(255, 6);
-      r1.steer(15);
-      delay(2000);
+      r1.forward();
+      delay(1000);
       inPit = false;
       r1.setSpeed(250);
+      r1.forward();
     }
-    else{
-      r1.climbSetting();
-    }
+    // else{
+    //   r1.pitSetting();
+    // }
   }
 
   float curr_dist = r1.readDistFront();
+  // turning function
   if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 5){
     // if(millis() - time_at_wall > 2000){
     //   time_at_wall = millis();
@@ -72,13 +92,13 @@ void loop(){
     r1.turnRight(turn_tol);
     turns += 1;
 
-    r1.setSpeed(250);
-
     if(turns == 3){
       inPit = true;
       time_at_pit = millis();
     }
 
+    r1.setSpeed(250);
+    r1.forward();
     //}
   }
 

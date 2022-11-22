@@ -29,12 +29,14 @@ class rover {
 	
     void forward();
     void reverse();
+	void climb();
     void stop();
     void setSpeed(int speed);
 	void setSpeedWheel(int speed, int wheel);
     void turnRight(float tolerance);
 	void turnLeft();
     void climbSetting();
+	void pitSetting();
 	void diffTurnRight();
 	void diffTurnLeft();
 	void correction(float dist);

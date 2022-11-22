@@ -150,7 +150,7 @@ float rover::readGyroZ() {
 
 void rover::turnRight(float tolerance){
 	this->diffTurnRight();
-	delay(2000); 
+	delay(1500); 
 	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
 	}
 

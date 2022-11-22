@@ -3,8 +3,8 @@
 
 rover r1 = rover();
 int run = 1;
-int turnDist = 25;
-float turn_tol = 1.1;
+int turnDist = 22.5;
+float turn_tol = 1.9;
 
 void setup(){
     Serial.begin(9600);
@@ -13,7 +13,7 @@ void setup(){
     r1.setupSensors();
     delay(1000);
     r1.steerForward();
-    r1.setSpeed(100);
+    r1.setSpeed(250);
     r1.forward();
 }
 

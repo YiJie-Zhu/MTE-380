@@ -32,14 +32,15 @@ void rover::setupSensors(){
 }
 
 void rover::steerForward(){
-	s1.write(75);
-	s2.write(75);
+	s1.write(73);
+	s2.write(87);
 }
 
 void rover::steer(int x){
-	int turn = 75 - x;
-	s1.write(turn);
-	s2.write(turn);
+	int turn1 = 73 - x;
+	int turn2 = 87 - x;
+	s1.write(turn1);
+	s2.write(turn2);
 }
 
 void rover::forward(){
@@ -135,7 +136,7 @@ float rover::readGyroZ() {
 
 void rover::turnRight(float tolerance){
 	this->diffTurnRight();
-	delay(2000); 
+	delay(1500); 
 	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
 	}
 
@@ -148,8 +149,7 @@ void rover::correction(float dist){
 		result = 0;
 	} 
 	else{
-		result = (1.0/10)*dist*dist*dist+dist;
-		// 1/15 for design spec, 1/10 for actual
+		result = (1.0/8.0)*dist*dist*dist+dist;
 	}
 	if (result > 20){
 		result = 20;

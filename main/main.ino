@@ -3,7 +3,7 @@
 #include <PID_v1.h>
 
 rover r1 = rover();
-float turn_tol = 1.3;
+float turn_tol = 1.9;
 bool stop = false;
 bool inPit = false;
 float last_front_dist = 1000;
@@ -13,7 +13,8 @@ long int time_at_pit = 0;
 float front_dist = 150;
 int turns = 0;
 float turn_dist[11] = {22.5, 22.5, 22.5, 54, 54, 54, 54, 84, 84, 84, 84};
-int left_dist[11] = {4, 4, 4, 4, 33, 33, 33, 33, 63, 63, 63};
+int left_dist[11] = {5, 5, 5, 5, 33, 33, 33, 33, 63, 63, 63};
+// first left dist is 5 but can be turned down to 4 is nessesary
 
 
 void setup(){
@@ -21,9 +22,9 @@ void setup(){
   Wire.begin();
   r1.setupMotors(45, 47, 49, 51, 2, 13);
   r1.setupSensors();
+  delay(4000);
   r1.steerForward();
   r1.setSpeed(250);
-  delay(3000);
   r1.forward();
 }
 
@@ -86,10 +87,7 @@ void loop(){
     r1.stop();
     stop = true;
   }
-
   float left_dist_front = r1.readDistLeftFront();
-  float left_dist_back = r1.readDistLeftFront();
+  Serial.println(left_dist_front);
   r1.correction(left_dist[turns] - left_dist_front);
-  
-
 }

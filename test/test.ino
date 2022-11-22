@@ -23,7 +23,7 @@ void loop(){
     exit(0);
   }
   float dist = r1.readDistFront();
-  delay(1500);
+  delay(750);
  // if (last_front_dist - front_dist < 1 /*&& millis() - time_at_pit > 3500*/){
   if (dist - r1.readDistFront() < 1 && inPit){
     r1.forward();

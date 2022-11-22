@@ -10,6 +10,7 @@ float last_front_dist = 1000;
 long int last_front_dist_time = 0;
 long int time_at_wall = 0;
 long int time_at_pit = 0;
+long int time_in_wheelie = 0;
 float front_dist = 150;
 int turns = 0;
 float turn_dist[11] = {22.5, 22.5, 22.5, 54, 54, 54, 54, 84, 84, 84, 84};
@@ -47,7 +48,7 @@ void loop(){
   }
 
   if(inPit){
-    if (last_front_dist - front_dist < 1 && millis() - time_at_pit > 3500){
+    if (last_front_dist - front_dist < 1 && millis() - time_in_wheelie > 750){
       r1.forward();
       r1.setSpeedWheel(180, 3);
       r1.setSpeedWheel(180, 4);
@@ -58,9 +59,10 @@ void loop(){
       inPit = false;
       r1.setSpeed(250);
     }
-    else if (millis() - time_at_pit > 3500) {
+    else if (millis() - time_at_pit > 2000) {
       r1.climbSetting();
       r1.climb();
+      time_in_wheelie = millis();
     }
     else{
       r1.pitSetting();

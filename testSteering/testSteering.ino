@@ -24,7 +24,7 @@ void loop(){
     }
     int front_dist = r1.readDistFront();
     if(front_dist < turnDist){
-        r1.turnRight(turn_tol);
+        r1.turnRight(turn_tol, 35);
         run = 0;
     }
 }

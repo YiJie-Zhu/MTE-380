@@ -104,10 +104,10 @@ void rover::pitSetting() {
 	this->setSpeedWheel(0, 6);
 }
 
-void rover::diffTurnRight(){
+void rover::diffTurnRight(int degree){
 	int angle = 35*3.14/180;
 	int speed = 225;
-	this->steer(35);
+	this->steer(degree);
 	shield.setSpeedWheel(speed, 1);
 	shield.setSpeedWheel(speed/4, 2);
 	shield.setSpeedWheel(speed*cos(angle), 3);
@@ -149,8 +149,8 @@ float rover::readGyroZ() {
 	return g.angleZ();
 }
 
-void rover::turnRight(float tolerance){
-	this->diffTurnRight();
+void rover::turnRight(float tolerance, int degree){
+	this->diffTurnRight(degree);
 	delay(1500); 
 	while (this->readDistLeftBack() - this->readDistLeftFront() > tolerance){
 	}
@@ -164,7 +164,7 @@ void rover::correction(float dist){
 		result = 0;
 	} 
 	else{
-		result = (1.0/8.0)*dist*dist*dist+dist;
+		result = (1.0/10.0)*dist*dist*dist+dist;
 	}
 	if (result > 20){
 		result = 20;

@@ -11,10 +11,12 @@ long int last_front_dist_time = 0;
 long int time_at_wall = 0;
 long int time_at_pit = 0;
 long int time_in_wheelie = 0;
+long int time_at_turn = 0;
 float front_dist = 150;
 int turns = 0;
-float turn_dist[11] = {22.5, 22.5, 22.5, 54, 54, 54, 54, 84, 84, 84, 84};
-int left_dist[11] = {5, 5, 5, 5, 33, 33, 33, 33, 63, 63, 63};
+float turn_dist[11] = {22.5, 22.5, 24.5, 48, 48, 48, 48, 78, 78, 78, 78};
+int left_dist[11] = {5, 5.5, 5, 8, 35.5, 35.5, 35.5, 35.5, 65.5, 65.5, 65.5};
+long int turn_delay[11] = {500, 500, 500, 500, 500, 500, 500, 500, 0, 0, 0};
 // first left dist is 5 but can be turned down to 4 is nessesary
 
 
@@ -62,7 +64,9 @@ void loop(){
     //   r1.setSpeed(250);
     // }
     //else if (millis() - time_at_pit > 1000) {
-    if(r1.readDistFront() < 65){
+    if(r1.readDistFront() < 75 && millis() - time_at_pit > 2000){
+      r1.stop();
+      delay(500);
       r1.climbSetting();
       r1.climb();
       //time_in_wheelie = millis();
@@ -72,7 +76,7 @@ void loop(){
       r1.setSpeedWheel(255, 5);
       r1.setSpeedWheel(255, 6);
       r1.forward();
-      delay(1000);
+      delay(200);
       inPit = false;
       r1.setSpeed(250);
       r1.forward();
@@ -84,12 +88,17 @@ void loop(){
 
   float curr_dist = r1.readDistFront();
   // turning function
-  if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 5){
+  if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 5 && millis() - time_at_turn > turn_delay[turns]){
     // if(millis() - time_at_wall > 2000){
     //   time_at_wall = millis();
     // }
     //else if(millis() - time_at_wall > 600){
-    r1.turnRight(turn_tol);
+    int degree = 35;
+    if(turns > 3){
+      degree = 40;
+    }
+    r1.turnRight(turn_tol, degree);
+    time_at_turn = millis();
     turns += 1;
 
     if(turns == 3){
@@ -108,6 +117,5 @@ void loop(){
     stop = true;
   }
   float left_dist_front = r1.readDistLeftFront();
-  Serial.println(left_dist_front);
   r1.correction(left_dist[turns] - left_dist_front);
 }

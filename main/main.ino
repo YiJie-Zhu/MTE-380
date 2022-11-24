@@ -1,6 +1,5 @@
 #include <roverLib.h>
 #include "Wire.h"
-#include <PID_v1.h>
 
 rover r1 = rover();
 float turn_tol = 1.9;
@@ -14,8 +13,8 @@ long int time_in_wheelie = 0;
 long int time_at_turn = 0;
 float front_dist = 150;
 int turns = 0;
-float turn_dist[11] = {22.5, 22.5, 24.5, 48, 48, 48, 48, 78, 78, 78, 78};
-int left_dist[11] = {5, 5.5, 5, 8, 35.5, 35.5, 35.5, 35.5, 65.5, 65.5, 65.5};
+float turn_dist[11] = {22.5, 22.5, 24.5, 48, 48, 48, 48, 78, 85, 78, 78};
+int left_dist[11] = {5, 5, 5, 8, 35.5, 35.5, 35.5, 35.5, 65.5, 65.5, 65.5};
 long int turn_delay[11] = {500, 500, 500, 500, 500, 500, 500, 500, 0, 0, 0};
 // first left dist is 5 but can be turned down to 4 is nessesary
 
@@ -88,9 +87,9 @@ void loop(){
 
   float curr_dist = r1.readDistFront();
   // turning function
-  if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 5 && millis() - time_at_turn > turn_delay[turns]){
+  if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 8 && millis() - time_at_turn > turn_delay[turns]){
     // if(millis() - time_at_wall > 2000){
-    //   time_at_wall = millis();
+    //   time_at_wall = millis(); 
     // }
     //else if(millis() - time_at_wall > 600){
     int degree = 35;

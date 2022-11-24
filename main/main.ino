@@ -13,7 +13,7 @@ long int time_in_wheelie = 0;
 long int time_at_turn = 0;
 float front_dist = 150;
 int turns = 0;
-float turn_dist[11] = {22.5, 22.5, 24.5, 44, 44, 44, 44, 75, 80, 75, 70};
+float turn_dist[11] = {20, 22.5, 24.5, 44, 44, 44, 44, 75, 80, 75, 70};
 int left_dist[11] = {5.5, 5.5, 5.5, 8, 35.5, 35.5, 35.5, 35.5, 65.5, 65.5, 65.5};
 long int turn_delay[11] = {500, 500, 500, 500, 500, 500, 500, 500, 0, 0, 0};
 // first left dist is 5 but can be turned down to 4 is nessesary
@@ -71,6 +71,16 @@ void loop(){
   }
 
   float curr_dist = r1.readDistFront();
+  if (turn_dist[turns] - curr_dist > 8 && !inPit){
+    r1.stop();
+    delay(250);
+    if (turn_dist[turns] - curr_dist > 8){
+      r1.setSpeed(150);
+      r1.reverse();
+      delay(250);
+      r1.forward();
+    }
+  }
   // turning function
   if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 8 && millis() - time_at_turn > turn_delay[turns]){
     // if(millis() - time_at_wall > 2000){

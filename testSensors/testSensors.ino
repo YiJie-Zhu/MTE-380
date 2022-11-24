@@ -11,15 +11,9 @@ float dist = 0;
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println("yikes");
   dist = r1.readDistFront();
   Serial.println(dist);
-  dist = r1.readDistLeft();
-  Serial.println(dist);
-
-  dist = r1.readGyroZ();
-  Serial.println(dist);
-  
-  Serial.println();
-  delay(1000);
+  dist = r1.readDistLeftFront();
+  // Serial.println(dist);
+  delay(100);
 }

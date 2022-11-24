@@ -3,7 +3,7 @@
 
 rover r1 = rover();
 int run = 1;
-int turnDist = 22.5;
+int turnDist = 44;
 float turn_tol = 1.9;
 
 void setup(){
@@ -23,8 +23,13 @@ void loop(){
         return;
     }
     int front_dist = r1.readDistFront();
-    if(front_dist < turnDist){
+    Serial.println(front_dist);
+    delay(100);
+    if(front_dist <= turnDist && turnDist - front_dist < 8){
         r1.turnRight(turn_tol, 35);
         run = 0;
+    }
+    if (front_dist < 40){
+      run = 0;
     }
 }

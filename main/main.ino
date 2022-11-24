@@ -13,8 +13,8 @@ long int time_in_wheelie = 0;
 long int time_at_turn = 0;
 float front_dist = 150;
 int turns = 0;
-float turn_dist[11] = {22.5, 22.5, 24.5, 48, 48, 48, 48, 78, 85, 78, 78};
-int left_dist[11] = {5, 5, 5, 8, 35.5, 35.5, 35.5, 35.5, 65.5, 65.5, 65.5};
+float turn_dist[11] = {22.5, 22.5, 24.5, 44, 44, 44, 44, 75, 80, 75, 70};
+int left_dist[11] = {5.5, 5.5, 5.5, 8, 35.5, 35.5, 35.5, 35.5, 65.5, 65.5, 65.5};
 long int turn_delay[11] = {500, 500, 500, 500, 500, 500, 500, 500, 0, 0, 0};
 // first left dist is 5 but can be turned down to 4 is nessesary
 
@@ -34,35 +34,23 @@ void loop(){
   if(stop == true){
     return;
   }
-  if(millis() - last_front_dist_time > 200 && inPit){
+  if(millis() - last_front_dist_time > 2000){
     last_front_dist_time = millis();
-    // if(last_front_dist < 1000 && last_front_dist - front_dist > 20.0){
-    //   inPit = true;
-    //   time_at_pit = millis();
-    // }
-    // Serial.print("LFD: ");
-    // Serial.println(last_front_dist);
-    // Serial.print("FD: ");
-    // Serial.println(front_dist);
-    // Serial.println(inPit);
+    if(last_front_dist < 1000 && last_front_dist - front_dist < 1){
+      r1.setSpeedWheel(180, 3);
+      r1.setSpeedWheel(180, 4);
+      r1.setSpeedWheel(255, 5);
+      r1.setSpeedWheel(255, 6);
+      r1.forward();
+      delay(200);
+      r1.setSpeed(250);
+      r1.forward();
+    }
     last_front_dist = front_dist;
     front_dist = r1.readDistFront();
   }
 
   if(inPit){
-    // if (last_front_dist - front_dist < 1 && millis() - time_in_wheelie > 1000){
-    //   r1.setSpeedWheel(180, 3);
-    //   r1.setSpeedWheel(180, 4);
-    //   r1.setSpeedWheel(255, 5);
-    //   r1.setSpeedWheel(255, 6);
-    //   r1.forward();
-
-    //   //r1.steer(15);
-    //   delay(1000);
-    //   inPit = false;
-    //   r1.setSpeed(250);
-    // }
-    //else if (millis() - time_at_pit > 1000) {
     if(r1.readDistFront() < 75 && millis() - time_at_pit > 2000){
       r1.stop();
       delay(500);
@@ -80,9 +68,6 @@ void loop(){
       r1.setSpeed(250);
       r1.forward();
     }
-    // else{
-    //   r1.pitSetting();
-    // }
   }
 
   float curr_dist = r1.readDistFront();
@@ -96,6 +81,9 @@ void loop(){
     if(turns > 3){
       degree = 40;
     }
+    if(turns > 7){
+      degree = 45;
+    }
     r1.turnRight(turn_tol, degree);
     time_at_turn = millis();
     turns += 1;
@@ -104,17 +92,20 @@ void loop(){
       inPit = true;
       time_at_pit = millis();
     }
-
-    r1.setSpeed(250);
-    r1.forward();
     //}
   }
 
-  if (turns >= 11) {
+  if (turns == 9) {
     // while(r1.readDistFront() > turn_dist[turns]) {}
+    r1.turnRight(turn_tol, 45);
     r1.stop();
     stop = true;
   }
+  else{
+    r1.setSpeed(250);
+    r1.forward();
+  }
+
   float left_dist_front = r1.readDistLeftFront();
   r1.correction(left_dist[turns] - left_dist_front);
 }

@@ -7,7 +7,7 @@ float turn_tol = 1.9;
 bool stop = false;
 bool inPit = false;
 float last_front_dist = 1000;
-long int last_front_dist_time = 0;
+long int last_front_dist_time = -1000;
 long int time_at_wall = 0;
 long int time_at_pit = 0;
 long int time_in_wheelie = 0;
@@ -35,7 +35,7 @@ void loop(){
   if(stop == true){
     return;
   }
-  if(millis() - last_front_dist_time > 200 && inPit){
+  if(millis() - last_front_dist_time > 100){
     last_front_dist_time = millis();
     // if(last_front_dist < 1000 && last_front_dist - front_dist > 20.0){
     //   inPit = true;
@@ -46,7 +46,6 @@ void loop(){
     // Serial.print("FD: ");
     // Serial.println(front_dist);
     // Serial.println(inPit);
-    last_front_dist = front_dist;
     front_dist = r1.readDistFront();
   }
 
@@ -88,7 +87,7 @@ void loop(){
 
   float curr_dist = r1.readDistFront();
   // turning function
-  if (curr_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - curr_dist) < 5 && millis() - time_at_turn > turn_delay[turns]){
+  if (front_dist < turn_dist[turns] && !inPit && (turn_dist[turns] - front_dist) < 5 && millis() - time_at_turn > turn_delay[turns]){
     // if(millis() - time_at_wall > 2000){
     //   time_at_wall = millis();
     // }
